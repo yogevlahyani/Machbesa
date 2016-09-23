@@ -100,7 +100,7 @@ angular.module('starter', [
 
 })
 
-.controller("MainCtrl", function($scope, $ionicPopup, $rootScope, $cordovaNetwork, $state, $cordovaInAppBrowser) {
+.controller("MainCtrl", function($scope, $ionicPlatform, $ionicPopup, $rootScope, $cordovaNetwork, $state, $cordovaInAppBrowser) {
 	document.addEventListener("deviceready", function () {
 
     var type = $cordovaNetwork.getNetwork()
@@ -150,7 +150,7 @@ angular.module('starter', [
         type: 'button-positive',
         onTap: function(e) {
           if (true) {
-			ionic.Platform.exitApp();
+			$ionicPlatform.exitApp();
 			return true;
           } else {
             return false;
