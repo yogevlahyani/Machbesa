@@ -121,7 +121,8 @@ angular.module('starter', [
   }, false);
   
   document.addEventListener("backbutton", function() {
-	  $scope.iframe.contentWindow.history.back();
+	  var iframe = document.getElementByTagName('iframe');
+	  iframe.contentWindow.history.back();
   }, false);
   
 })
