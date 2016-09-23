@@ -36,7 +36,7 @@ angular.module('starter', [
                 }, 
                 function() {
                     $rootScope.admob.requestAd(
-                        { 'isTesting': false }, 
+                        { 'isTesting': true }, 
                         function() {
                             $rootScope.admob.showAd(true);
                         }, 
