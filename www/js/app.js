@@ -150,7 +150,7 @@ angular.module('starter', [
         type: 'button-positive',
         onTap: function(e) {
           if (true) {
-			$ionicPlatform.exitApp();
+			navigator.app.exitApp();
 			return true;
           } else {
             return false;
