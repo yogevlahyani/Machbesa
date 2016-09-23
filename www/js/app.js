@@ -63,7 +63,7 @@ angular.module('starter', [
 	
   })
 
-.config(function($stateProvider, $urlRouterProvider) {
+.config(function($stateProvider, $urlRouterProvider, $cordovaInAppBrowserProvider) {
 
   // Ionic uses AngularUI Router which uses the concept of states
   // Learn more here: https://github.com/angular-ui/ui-router
@@ -84,10 +84,23 @@ angular.module('starter', [
 
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/');
+  
+  
+    var defaultOptions = {
+    location: 'no',
+    clearcache: 'no',
+    toolbar: 'no'
+  };
+
+  document.addEventListener("deviceready", function () {
+
+    $cordovaInAppBrowserProvider.setDefaultOptions(options)
+
+  }, false);
 
 })
 
-.controller("MainCtrl", function($scope, $ionicPopup, $rootScope, $cordovaNetwork, $state, $location) {
+.controller("MainCtrl", function($scope, $ionicPopup, $rootScope, $cordovaNetwork, $state, $cordovaInAppBrowser) {
 	document.addEventListener("deviceready", function () {
 
     var type = $cordovaNetwork.getNetwork()
@@ -148,6 +161,51 @@ angular.module('starter', [
   });
 		
   }, false);
+  
+  // InAppBrowser
+    var options = {
+      location: 'yes',
+      clearcache: 'yes',
+      toolbar: 'no'
+    };
+
+  document.addEventListener("deviceready", function () {
+    $cordovaInAppBrowser.open('http://ngcordova.com', '_blank', options)
+      .then(function(event) {
+        // success
+      })
+      .catch(function(event) {
+        // error
+      });
+
+
+    $cordovaInAppBrowser.close();
+
+  }, false);
+
+  $rootScope.$on('$cordovaInAppBrowser:loadstart', function(e, event){
+
+  });
+
+  $rootScope.$on('$cordovaInAppBrowser:loadstop', function(e, event){
+    // insert CSS via code / file
+    $cordovaInAppBrowser.insertCSS({
+      code: 'body {background-color:blue;}'
+    });
+
+    // insert Javascript via code / file
+    $cordovaInAppBrowser.executeScript({
+      file: 'script.js'
+    });
+  });
+
+  $rootScope.$on('$cordovaInAppBrowser:loaderror', function(e, event){
+
+  });
+
+  $rootScope.$on('$cordovaInAppBrowser:exit', function(e, event){
+
+  });
   
 })
 

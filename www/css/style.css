@@ -7,7 +7,7 @@
 
 iframe {
     width: 100%;
-    min-height: 95vh;
+    height: 95vh;
 }
 
 .button.button-block {
