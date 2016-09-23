@@ -150,8 +150,8 @@ angular.module('starter', [
         type: 'button-positive',
         onTap: function(e) {
           if (true) {
-			  ionic.Platform.exitApp();
-            e.preventDefault();
+			ionic.Platform.exitApp();
+			return true;
           } else {
             return false;
           }
@@ -179,7 +179,7 @@ angular.module('starter', [
       });
 
 
-    $cordovaInAppBrowser.close();
+    //$cordovaInAppBrowser.close();
 
   }, false);
 
