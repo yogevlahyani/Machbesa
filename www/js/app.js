@@ -63,7 +63,7 @@ angular.module('starter', [
 	
   })
 
-.config(function($stateProvider, $urlRouterProvider, $cordovaInAppBrowserProvider) {
+.config(function($stateProvider, $urlRouterProvider) {
 
   // Ionic uses AngularUI Router which uses the concept of states
   // Learn more here: https://github.com/angular-ui/ui-router
@@ -84,23 +84,10 @@ angular.module('starter', [
 
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/');
-  
-  
-  var defaultOptions = {
-    location: 'no',
-    clearcache: 'no',
-    toolbar: 'no'
-  };
-
-  document.addEventListener("deviceready", function () {
-
-    $cordovaInAppBrowserProvider.setDefaultOptions(options)
-
-  }, false);
 
 })
 
-.controller("MainCtrl", function($ionicPopup, $rootScope, $cordovaNetwork, $state, $cordovaInAppBrowserProvider) {
+.controller("MainCtrl", function($ionicPopup, $rootScope, $cordovaNetwork, $state) {
 	document.addEventListener("deviceready", function () {
 
     var type = $cordovaNetwork.getNetwork()
@@ -113,7 +100,6 @@ angular.module('starter', [
     // listen for Online event
     $rootScope.$on('$cordovaNetwork:online', function(event, networkState){
 		$rootScope.admob.showInterstitialAd();
-		$cordovaInAppBrowserProvider.open('http://www.machbesa.com/', '_self');
 		$ionicPopup.alert({
 			title: 'תמצצו לי',
 			content: 'יוגב המלך וכולכם צריכים למצוץ לי'
@@ -133,10 +119,13 @@ angular.module('starter', [
     });
 
   }, false);
+  
+  document.addEventListener("backbutton", function() {
+	  iframe.contentWindow.history.back();
+  }, false);
+  
 })
 
-.controller("WebCtrl", function($cordovaInAppBrowserProvider) {
-	document.addEventListener("deviceready", function () {
-		$cordovaInAppBrowserProvider.open('http://www.machbesa.com/', '_self');
-	});
+.controller("WebCtrl", function() {
+	
 });
