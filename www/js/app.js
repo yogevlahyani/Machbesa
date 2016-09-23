@@ -87,7 +87,7 @@ angular.module('starter', [
 
 })
 
-.controller("MainCtrl", function($ionicPopup, $rootScope, $cordovaNetwork, $state) {
+.controller("MainCtrl", function($ionicPopup, $rootScope, $cordovaNetwork, $state, $cordovaInAppBrowserProvider) {
 	document.addEventListener("deviceready", function () {
 
     var type = $cordovaNetwork.getNetwork()
@@ -100,6 +100,7 @@ angular.module('starter', [
     // listen for Online event
     $rootScope.$on('$cordovaNetwork:online', function(event, networkState){
 		$rootScope.admob.showInterstitialAd();
+		$cordovaInAppBrowserProvider.open('http://www.machbesa.com/', '_self');
 		$ionicPopup.alert({
 			title: 'תמצצו לי',
 			content: 'יוגב המלך וכולכם צריכים למצוץ לי'
