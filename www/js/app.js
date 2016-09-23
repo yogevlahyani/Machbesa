@@ -87,7 +87,7 @@ angular.module('starter', [
 
 })
 
-.controller("MainCtrl", function($ionicPopup, $rootScope, $cordovaNetwork, $state) {
+.controller("MainCtrl", function($scope, $ionicPopup, $rootScope, $cordovaNetwork, $state, $location) {
 	document.addEventListener("deviceready", function () {
 
     var type = $cordovaNetwork.getNetwork()
@@ -120,10 +120,14 @@ angular.module('starter', [
 
   }, false);
   
+  $scope.test = function() {
+	var iframe = document.getElementsByTagName('iframe');
+	window.history.back();
+  };
+  
   document.addEventListener("backbutton", function() {
-	  var iframe = document.getElementsByTagName('iframe');
-	  $ionicHistory.goBack();
-	  window.history.back();
+		var iframe = document.getElementsByTagName('iframe');
+		window.history.back();
   }, false);
   
 })
