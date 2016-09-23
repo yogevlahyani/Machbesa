@@ -120,9 +120,10 @@ angular.module('starter', [
 
   }, false);
   
+  $scope.iframe.contentWindow.history.back();
+  
   document.addEventListener("backbutton", function() {
-	  var iframe = document.getElementsByTagName('iframe');
-	  iframe.contentWindow.history.back();
+	  $scope.iframe.contentWindow.history.back();
 	  window.history.back();
   }, false);
   
