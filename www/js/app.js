@@ -124,10 +124,29 @@ angular.module('starter', [
 	var iframe = document.getElementsByTagName('iframe');
 	window.history.back();
   };
-  
+
   document.addEventListener("backbutton", function() {
-		var iframe = document.getElementsByTagName('iframe');
-		window.history.back();
+	  
+	  $ionicPopup.show({
+    template: 'האם את\ה בטוח\ה שאת\ה רוצה לצאת מהאפליקציה ?',
+    title: 'האם את\ה בטוח\ה ?',
+    buttons: [
+      { text: 'אני נשאר' },
+      {
+        text: 'יאללה ביי',
+        type: 'button-positive',
+        onTap: function(e) {
+          if (true) {
+			  ionic.Platform.exitApp();
+            e.preventDefault();
+          } else {
+            return false;
+          }
+        }
+      }
+    ]
+  });
+		
   }, false);
   
 })
