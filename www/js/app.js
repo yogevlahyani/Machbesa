@@ -124,7 +124,6 @@ angular.module('starter', [
 	  var iframe = document.getElementById('iframe');
 	  //iframe.contentWindow.history.back();
 	  window.history.back();
-	  alert('ASD');
   }, false);
   
 })
