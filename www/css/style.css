@@ -1,5 +1,10 @@
 /* Empty. Add your own CSS if you like */
 
+* {
+	direction: rtl;
+	text-align: right;
+}
+
 iframe {
     width: 100%;
     min-height: 100vh;

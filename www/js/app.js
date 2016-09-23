@@ -24,10 +24,69 @@ angular.module('starter', [
       StatusBar.styleDefault();
     }
 	
+	if(window.plugins && window.plugins.AdMob) {
+            var admob_key = device.platform == "Android" ? "ca-app-pub-9527017308521805/7487375975" : "ca-app-pub-9527017308521805/7487375975";
+            var admob_interstitial = "ca-app-pub-9527017308521805/6928972773";
+            $rootScope.admob = window.plugins.AdMob;
+            $rootScope.admob.createBannerView( 
+                {
+                    'publisherId': admob_key,
+                    'adSize': $rootScope.admob.AD_SIZE.SMART_BANNER,
+                    'bannerAtTop': false
+                }, 
+                function() {
+                    $rootScope.admob.requestAd(
+                        { 'isTesting': false }, 
+                        function() {
+                            $rootScope.admob.showAd(true);
+                        }, 
+                        function() { console.log('failed to request ad'); }
+                    );
+                }, 
+                function() { console.log('failed to create banner view'); }
+            );
+			
+			
+			$rootScope.admob.createInterstitialView({
+				'publisherId': admob_interstitial
+			});
+			
+			$rootScope.admob.requestInterstitialAd({
+				'isTesting': true
+			});
+			
+			$rootScope.admob.showInterstitialAd();
+			
+        }
+	
   });
+	
+  })
+
+.config(function($stateProvider, $urlRouterProvider) {
+
+  // Ionic uses AngularUI Router which uses the concept of states
+  // Learn more here: https://github.com/angular-ui/ui-router
+  // Set up the various states which the app can be in.
+  // Each state's controller can be found in controllers.js
+  $stateProvider
+
+  // setup an abstract state for the tabs directive
+    .state('main', {
+    url: '/',
+    templateUrl: 'main.html'
+  })
+    .state('offline', {
+    url: '/offline',
+    templateUrl: 'offline.html'
+  });
+
+  // if none of the above states are matched, use this as the fallback
+  $urlRouterProvider.otherwise('/');
+
 })
 
-.controller("MainCtrl", function($ionicPopup, $rootScope, $cordovaNetwork) {
+.controller("MainCtrl", function($ionicPopup, $rootScope, $cordovaNetwork, $state) {
 	document.addEventListener("deviceready", function () {
 
     var type = $cordovaNetwork.getNetwork()
@@ -39,18 +98,20 @@ angular.module('starter', [
 
     // listen for Online event
     $rootScope.$on('$cordovaNetwork:online', function(event, networkState){
-      var onlineState = networkState;
-	  $ionicPopup.confirm({
-			title: 'מחובר',
-			content: 'אינך מחובר לאינטרנט, אנא התחבר וחזור אלינו'
+		$rootScope.admob.showInterstitialAd();
+		$ionicPopup.alert({
+			title: 'תמצצו לי',
+			content: 'יוגב המלך וכולכם צריכים למצוץ לי'
 		});
     });
 
     // listen for Offline event
     $rootScope.$on('$cordovaNetwork:offline', function(event, networkState){
-		$ionicPopup.confirm({
-			title: 'לא מחובר',
+		$ionicPopup.alert({
+			title: 'מחובר',
 			content: 'אינך מחובר לאינטרנט, אנא התחבר וחזור אלינו'
+		}).then(function(res) {
+			$state.go("offline");
 		});
     });
 
