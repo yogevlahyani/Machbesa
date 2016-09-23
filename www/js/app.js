@@ -24,24 +24,35 @@ angular.module('starter', [
       StatusBar.styleDefault();
     }
 	
-	var type = $cordovaNetwork.getNetwork();
+  });
+})
 
-    var isOnline = $cordovaNetwork.isOnline();
+.controller("MainCtrl", function($ionicPopup, $rootScope, $cordovaNetwork) {
+	document.addEventListener("deviceready", function () {
 
-    var isOffline = $cordovaNetwork.isOffline();
+    var type = $cordovaNetwork.getNetwork()
+
+    var isOnline = $cordovaNetwork.isOnline()
+
+    var isOffline = $cordovaNetwork.isOffline()
 
 
     // listen for Online event
     $rootScope.$on('$cordovaNetwork:online', function(event, networkState){
-		var onlineState = networkState;
-		console.log("Online: " + onlineState);
-    })
+      var onlineState = networkState;
+	  $ionicPopup.confirm({
+			title: 'מחובר',
+			content: 'אינך מחובר לאינטרנט, אנא התחבר וחזור אלינו'
+		});
+    });
 
     // listen for Offline event
     $rootScope.$on('$cordovaNetwork:offline', function(event, networkState){
-		var offlineState = networkState;
-		console.log("Offline: " + offlineState);
-    })
-	
-  });
-})
+		$ionicPopup.confirm({
+			title: 'לא מחובר',
+			content: 'אינך מחובר לאינטרנט, אנא התחבר וחזור אלינו'
+		});
+    });
+
+  }, false);
+});
