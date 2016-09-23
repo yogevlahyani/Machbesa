@@ -74,7 +74,8 @@ angular.module('starter', [
   // setup an abstract state for the tabs directive
     .state('main', {
     url: '/',
-    templateUrl: 'main.html'
+    templateUrl: 'main.html',
+	controller: "WebCtrl"
   })
     .state('offline', {
     url: '/offline',
@@ -102,13 +103,15 @@ angular.module('starter', [
 		$ionicPopup.alert({
 			title: 'תמצצו לי',
 			content: 'יוגב המלך וכולכם צריכים למצוץ לי'
+		}).then(function(res) {
+			$state.go("/");
 		});
     });
 
     // listen for Offline event
     $rootScope.$on('$cordovaNetwork:offline', function(event, networkState){
 		$ionicPopup.alert({
-			title: 'מחובר',
+			title: 'לא מחובר',
 			content: 'אינך מחובר לאינטרנט, אנא התחבר וחזור אלינו'
 		}).then(function(res) {
 			$state.go("offline");
@@ -116,4 +119,8 @@ angular.module('starter', [
     });
 
   }, false);
+})
+
+.controller("WebCtrl", function($cordovaInAppBrowserProvider) {
+	$cordovaInAppBrowserProvider.open('http://www.machbesa.com/', '_self');
 });
