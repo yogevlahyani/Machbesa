@@ -122,5 +122,7 @@ angular.module('starter', [
 })
 
 .controller("WebCtrl", function($cordovaInAppBrowserProvider) {
-	$cordovaInAppBrowserProvider.open('http://www.machbesa.com/', '_self');
+	document.addEventListener("deviceready", function () {
+		$cordovaInAppBrowserProvider.open('http://www.machbesa.com/', '_self');
+	});
 });
