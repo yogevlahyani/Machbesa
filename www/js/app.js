@@ -87,7 +87,7 @@ angular.module('starter', [
 
 })
 
-.controller("MainCtrl", function($ionicPopup, $rootScope, $cordovaNetwork, $state) {
+.controller("MainCtrl", function($scope, $ionicPopup, $rootScope, $cordovaNetwork, $state) {
 	document.addEventListener("deviceready", function () {
 
     var type = $cordovaNetwork.getNetwork()
@@ -119,8 +119,6 @@ angular.module('starter', [
     });
 
   }, false);
-  
-  $scope.iframe.contentWindow.history.back();
   
   document.addEventListener("backbutton", function() {
 	  $scope.iframe.contentWindow.history.back();
