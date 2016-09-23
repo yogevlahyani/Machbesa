@@ -121,7 +121,7 @@ angular.module('starter', [
   }, false);
   
   document.addEventListener("backbutton", function() {
-	  iframe.contentWindow.history.back();
+	  $scope.iframe.contentWindow.history.back();
   }, false);
   
 })
