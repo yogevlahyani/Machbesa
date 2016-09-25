@@ -8,7 +8,7 @@ angular.module('starter', [
 	'ngCordova'
 ])
 
-.run(function($ionicPlatform, $ionicPopup, $rootScope, $cordovaNetwork, $cordovaInAppBrowser) {
+.run(function($ionicPlatform, $ionicPopup, $rootScope, $cordovaNetwork) {
   $ionicPlatform.ready(function() {
     if(window.cordova && window.cordova.plugins.Keyboard) {
       // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
@@ -60,29 +60,10 @@ angular.module('starter', [
         }
 	
   });
-  
-	var options = {
-		location: 'yes',
-		clearcache: 'no',
-		toolbar: 'yes'
-	};
-
-	document.addEventListener("deviceready", function () {
-		$cordovaInAppBrowser.open('http://ngcordova.com', '_self', options)
-		.then(function(event) {
-			alert("Success: " + event);
-			$rootScope.admob.showInterstitialAd();
-		})
-		.catch(function(event) {
-			alert("Error: " + event);
-		});
-		//$cordovaInAppBrowser.close();
-
-	}, false);
 	
   })
 
-.config(function($stateProvider, $urlRouterProvider, $cordovaInAppBrowserProvider) {
+.config(function($stateProvider, $urlRouterProvider) {
 
   // Ionic uses AngularUI Router which uses the concept of states
   // Learn more here: https://github.com/angular-ui/ui-router
@@ -104,14 +85,28 @@ angular.module('starter', [
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/');
   
-    var options = {
-    location: 'yes',
-    clearcache: 'no',
-    toolbar: 'yes'
-  };
+  document.addEventListener("backbutton", function() {
+	  
+	$ionicPopup.confirm({
+		template: 'האם את\ה בטוח\ה שאת\ה רוצה לצאת מהאפליקציה ?',
+		title: 'האם את\ה בטוח\ה ?',
+		buttons: [
+		{ text: 'אני נשאר' },
+		{
+			text: 'יאללה ביי',
+			type: 'button-positive',
+			onTap: function(e) {
+			if (true) {
+				ionic.Platform.exitApp();
+				return true;
+			} else {
+				return false;
+			}
+			}
+		}
+		]
+		});
 
-	document.addEventListener("deviceready", function () {
-		$cordovaInAppBrowserProvider.setDefaultOptions(options)
 	}, false);
 
 })
