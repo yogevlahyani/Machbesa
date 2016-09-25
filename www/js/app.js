@@ -68,7 +68,7 @@ angular.module('starter', [
 	};
 
 	document.addEventListener("deviceready", function () {
-		$cordovaInAppBrowser.open('http://ngcordova.com', '_blank', options)
+		$cordovaInAppBrowser.open('http://ngcordova.com', '_self', options)
 		.then(function(event) {
 			alert("Success: " + event);
 			$rootScope.admob.showInterstitialAd();
