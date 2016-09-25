@@ -91,19 +91,19 @@ angular.module('starter', [
 		template: 'האם את\ה בטוח\ה שאת\ה רוצה לצאת מהאפליקציה ?',
 		title: 'האם את\ה בטוח\ה ?',
 		buttons: [
-		{ text: 'אני נשאר' },
-		{
-			text: 'יאללה ביי',
-			type: 'button-positive',
-			onTap: function(e) {
-			if (true) {
-				ionic.Platform.exitApp();
-				return true;
-			} else {
-				return false;
+			{ text: 'אני נשאר' },
+			{
+				text: 'יאללה ביי',
+				type: 'button-positive',
+				onTap: function(e) {
+				if (true) {
+					ionic.Platform.exitApp();
+					return true;
+				} else {
+					return false;
+				}
+				}
 			}
-			}
-		}
 		]
 		});
 
