@@ -75,7 +75,7 @@ angular.module('starter', [
 		.catch(function(event) {
 			alert("Error: " + event);
 		});
-		$cordovaInAppBrowser.close();
+		//$cordovaInAppBrowser.close();
 
 	}, false);
 	
