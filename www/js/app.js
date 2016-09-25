@@ -60,6 +60,30 @@ angular.module('starter', [
         }
 	
   });
+  
+    document.addEventListener("backbutton", function() {
+	  
+	$ionicPopup.show({
+		template: 'האם את\ה בטוח\ה שאת\ה רוצה לצאת מהאפליקציה ?',
+		title: 'האם את\ה בטוח\ה ?',
+		buttons: [
+			{ text: 'אני נשאר' },
+			{
+				text: 'יאללה ביי',
+				type: 'button-positive',
+				onTap: function(e) {
+				if (true) {
+					ionic.Platform.exitApp();
+					return true;
+				} else {
+					return false;
+				}
+				}
+			}
+		]
+	});
+
+	}, false);
 	
   })
 
@@ -84,30 +108,6 @@ angular.module('starter', [
 
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/');
-  
-  document.addEventListener("backbutton", function() {
-	  
-	$ionicPopup.show({
-		template: 'האם את\ה בטוח\ה שאת\ה רוצה לצאת מהאפליקציה ?',
-		title: 'האם את\ה בטוח\ה ?',
-		buttons: [
-			{ text: 'אני נשאר' },
-			{
-				text: 'יאללה ביי',
-				type: 'button-positive',
-				onTap: function(e) {
-				if (true) {
-					ionic.Platform.exitApp();
-					return true;
-				} else {
-					return false;
-				}
-				}
-			}
-		]
-	});
-
-	}, false);
 
 })
 
