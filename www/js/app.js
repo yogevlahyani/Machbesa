@@ -64,7 +64,7 @@ angular.module('starter', [
 	var options = {
 		location: 'no',
 		clearcache: 'no',
-		toolbar: 'no'
+		toolbar: 'yes'
 	};
 
 	document.addEventListener("deviceready", function () {
@@ -106,7 +106,7 @@ angular.module('starter', [
     var defaultOptions = {
     location: 'no',
     clearcache: 'no',
-    toolbar: 'no'
+    toolbar: 'yes'
   };
 
 	document.addEventListener("deviceready", function () {
@@ -128,12 +128,6 @@ angular.module('starter', [
     // listen for Online event
     $rootScope.$on('$cordovaNetwork:online', function(event, networkState){
 		$rootScope.admob.showInterstitialAd();
-		$ionicPopup.alert({
-			title: 'תמצצו לי',
-			content: 'יוגב המלך וכולכם צריכים למצוץ לי'
-		}).then(function(res) {
-			$state.go("/");
-		});
     });
 
     // listen for Offline event
@@ -146,35 +140,6 @@ angular.module('starter', [
 		});
     });
 
-  }, false);
-  
-  $scope.test = function() {
-	var iframe = document.getElementsByTagName('iframe');
-	window.history.back();
-  };
-
-  document.addEventListener("backbutton", function() {
-	  
-	  $ionicPopup.show({
-    template: 'האם את\ה בטוח\ה שאת\ה רוצה לצאת מהאפליקציה ?',
-    title: 'האם את\ה בטוח\ה ?',
-    buttons: [
-      { text: 'אני נשאר' },
-      {
-        text: 'יאללה ביי',
-        type: 'button-positive',
-        onTap: function(e) {
-          if (true) {
-			navigator.app.exitApp();
-			return true;
-          } else {
-            return false;
-          }
-        }
-      }
-    ]
-  });
-		
   }, false);
   
 })
