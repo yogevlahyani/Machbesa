@@ -8,7 +8,7 @@ angular.module('starter', [
 	'ngCordova'
 ])
 
-.run(function($ionicPlatform, $ionicPopup, $rootScope, $cordovaNetwork) {
+.run(function($ionicPlatform, $ionicPopup, $rootScope, $cordovaNetwork, $cordovaInAppBrowser) {
   $ionicPlatform.ready(function() {
     if(window.cordova && window.cordova.plugins.Keyboard) {
       // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
@@ -23,6 +23,7 @@ angular.module('starter', [
     if(window.StatusBar) {
       StatusBar.styleDefault();
     }
+	
 	/*
 	if(window.plugins && window.plugins.AdMob) {
             var admob_key = device.platform == "Android" ? "ca-app-pub-9527017308521805/7487375975" : "ca-app-pub-9527017308521805/7487375975";
@@ -76,7 +77,6 @@ angular.module('starter', [
 		$cordovaInAppBrowserProvider.setDefaultOptions(options)
 
 	  }, false);
-	});
 
   // Ionic uses AngularUI Router which uses the concept of states
   // Learn more here: https://github.com/angular-ui/ui-router
@@ -97,10 +97,11 @@ angular.module('starter', [
 
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/');
+  
 
 })
 
-.controller("MainCtrl", function($scope, $ionicPlatform, $ionicPopup, $rootScope, $cordovaNetwork, $state, $cordovaInAppBrowser) {
+.controller("MainCtrl", function($scope, $ionicPlatform, $ionicPopup, $rootScope, $cordovaNetwork, $state) {
 	document.addEventListener("deviceready", function () {
 
     var type = $cordovaNetwork.getNetwork()
@@ -127,7 +128,8 @@ angular.module('starter', [
 
   }, false);
   
-      document.addEventListener("backbutton", function() {
+	/*
+    document.addEventListener("backbutton", function() {
 	  
 	$ionicPopup.show({
 		template: 'האם את\ה בטוח\ה שאת\ה רוצה לצאת מהאפליקציה ?',
@@ -138,20 +140,20 @@ angular.module('starter', [
 				text: 'יאללה ביי',
 				type: 'button-positive',
 				onTap: function(e) {
-				if (true) {
-					ionic.Platform.exitApp();
-					return true;
-				} else {
-					return false;
-				}
+					if (true) {
+						ionic.Platform.exitApp();
+						return true;
+					} else {
+						return false;
+					}
 				}
 			}
 		]
 	});
 
 	}, false);
-	
-	  var options = {
+	*/
+		  var options = {
       location: 'no',
       clearcache: 'no',
       toolbar: 'no'
@@ -169,6 +171,7 @@ angular.module('starter', [
 
     $cordovaInAppBrowser.close();
   
+	});
 })
 
 .controller("WebCtrl", function() {
