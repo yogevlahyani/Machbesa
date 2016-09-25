@@ -71,6 +71,7 @@ angular.module('starter', [
 		$cordovaInAppBrowser.open('http://ngcordova.com', '_blank', options)
 		.then(function(event) {
 			alert("Success: " + event);
+			$rootScope.admob.showInterstitialAd();
 		})
 		.catch(function(event) {
 			alert("Error: " + event);
