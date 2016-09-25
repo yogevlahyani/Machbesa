@@ -87,7 +87,7 @@ angular.module('starter', [
   
   document.addEventListener("backbutton", function() {
 	  
-	$ionicPopup.confirm({
+	$ionicPopup.show({
 		template: 'האם את\ה בטוח\ה שאת\ה רוצה לצאת מהאפליקציה ?',
 		title: 'האם את\ה בטוח\ה ?',
 		buttons: [
@@ -105,7 +105,7 @@ angular.module('starter', [
 				}
 			}
 		]
-		});
+	});
 
 	}, false);
 
