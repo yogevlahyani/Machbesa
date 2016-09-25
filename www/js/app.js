@@ -62,7 +62,7 @@ angular.module('starter', [
   });
   
 	var options = {
-		location: 'no',
+		location: 'yes',
 		clearcache: 'no',
 		toolbar: 'yes'
 	};
@@ -104,8 +104,8 @@ angular.module('starter', [
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/');
   
-    var defaultOptions = {
-    location: 'no',
+    var options = {
+    location: 'yes',
     clearcache: 'no',
     toolbar: 'yes'
   };
