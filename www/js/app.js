@@ -62,7 +62,7 @@ angular.module('starter', [
   });
   
 	var options = {
-		location: 'no',
+		location: 'yes',
 		clearcache: 'no',
 		toolbar: 'yes'
 	};
@@ -104,7 +104,7 @@ angular.module('starter', [
   $urlRouterProvider.otherwise('/');
   
     var defaultOptions = {
-    location: 'no',
+    location: 'yes',
     clearcache: 'no',
     toolbar: 'yes'
   };
