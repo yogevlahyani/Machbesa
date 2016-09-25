@@ -8,7 +8,7 @@ angular.module('starter', [
 	'ngCordova'
 ])
 
-.run(function($ionicPlatform, $ionicPopup, $rootScope, $cordovaNetwork) {
+.run(function($ionicPlatform, $ionicPopup, $rootScope, $cordovaNetwork, $cordovaInAppBrowser) {
   $ionicPlatform.ready(function() {
     if(window.cordova && window.cordova.plugins.Keyboard) {
       // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
@@ -60,10 +60,28 @@ angular.module('starter', [
         }
 	
   });
+  
+	var options = {
+		location: 'no',
+		clearcache: 'no',
+		toolbar: 'no'
+	};
+
+	document.addEventListener("deviceready", function () {
+		$cordovaInAppBrowser.open('http://ngcordova.com', '_blank', options)
+		.then(function(event) {
+			alert("Success: " + event);
+		})
+		.catch(function(event) {
+			alert("Error: " + event);
+		});
+		$cordovaInAppBrowser.close();
+
+	}, false);
 	
   })
 
-.config(function($stateProvider, $urlRouterProvider) {
+.config(function($stateProvider, $urlRouterProvider, $cordovaInAppBrowserProvider) {
 
   // Ionic uses AngularUI Router which uses the concept of states
   // Learn more here: https://github.com/angular-ui/ui-router
@@ -84,6 +102,16 @@ angular.module('starter', [
 
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/');
+  
+    var defaultOptions = {
+    location: 'no',
+    clearcache: 'no',
+    toolbar: 'no'
+  };
+
+	document.addEventListener("deviceready", function () {
+		$cordovaInAppBrowserProvider.setDefaultOptions(options)
+	}, false);
 
 })
 
