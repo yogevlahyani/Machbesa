@@ -23,7 +23,7 @@ angular.module('starter', [
     if(window.StatusBar) {
       StatusBar.styleDefault();
     }
-	
+	/*
 	if(window.plugins && window.plugins.AdMob) {
             var admob_key = device.platform == "Android" ? "ca-app-pub-9527017308521805/7487375975" : "ca-app-pub-9527017308521805/7487375975";
             var admob_interstitial = "ca-app-pub-9527017308521805/6928972773";
@@ -46,7 +46,6 @@ angular.module('starter', [
                 function() { console.log('failed to create banner view'); }
             );
 			
-			
 			$rootScope.admob.createInterstitialView({
 				'publisherId': admob_interstitial
 			});
@@ -56,38 +55,28 @@ angular.module('starter', [
 			});
 			
 			$rootScope.admob.showInterstitialAd();
-			
         }
+		
+		*/
 	
   });
-  
-    document.addEventListener("backbutton", function() {
-	  
-	$ionicPopup.show({
-		template: 'האם את\ה בטוח\ה שאת\ה רוצה לצאת מהאפליקציה ?',
-		title: 'האם את\ה בטוח\ה ?',
-		buttons: [
-			{ text: 'אני נשאר' },
-			{
-				text: 'יאללה ביי',
-				type: 'button-positive',
-				onTap: function(e) {
-				if (true) {
-					ionic.Platform.exitApp();
-					return true;
-				} else {
-					return false;
-				}
-				}
-			}
-		]
-	});
-
-	}, false);
 	
   })
 
-.config(function($stateProvider, $urlRouterProvider) {
+.config(function($cordovaInAppBrowserProvider, $stateProvider, $urlRouterProvider) {
+	
+	  var options = {
+		location: 'no',
+		clearcache: 'no',
+		toolbar: 'no'
+	  };
+
+	  document.addEventListener("deviceready", function () {
+
+		$cordovaInAppBrowserProvider.setDefaultOptions(options)
+
+	  }, false);
+	});
 
   // Ionic uses AngularUI Router which uses the concept of states
   // Learn more here: https://github.com/angular-ui/ui-router
@@ -111,7 +100,7 @@ angular.module('starter', [
 
 })
 
-.controller("MainCtrl", function($scope, $ionicPlatform, $ionicPopup, $rootScope, $cordovaNetwork, $state) {
+.controller("MainCtrl", function($scope, $ionicPlatform, $ionicPopup, $rootScope, $cordovaNetwork, $state, $cordovaInAppBrowser) {
 	document.addEventListener("deviceready", function () {
 
     var type = $cordovaNetwork.getNetwork()
@@ -123,7 +112,7 @@ angular.module('starter', [
 
     // listen for Online event
     $rootScope.$on('$cordovaNetwork:online', function(event, networkState){
-		$rootScope.admob.showInterstitialAd();
+		//$rootScope.admob.showInterstitialAd();
     });
 
     // listen for Offline event
@@ -137,6 +126,48 @@ angular.module('starter', [
     });
 
   }, false);
+  
+      document.addEventListener("backbutton", function() {
+	  
+	$ionicPopup.show({
+		template: 'האם את\ה בטוח\ה שאת\ה רוצה לצאת מהאפליקציה ?',
+		title: 'האם את\ה בטוח\ה ?',
+		buttons: [
+			{ text: 'אני נשאר' },
+			{
+				text: 'יאללה ביי',
+				type: 'button-positive',
+				onTap: function(e) {
+				if (true) {
+					ionic.Platform.exitApp();
+					return true;
+				} else {
+					return false;
+				}
+				}
+			}
+		]
+	});
+
+	}, false);
+	
+	  var options = {
+      location: 'no',
+      clearcache: 'no',
+      toolbar: 'no'
+    };
+
+  document.addEventListener("deviceready", function () {
+    $cordovaInAppBrowser.open('http://Machbesa.com', '_blank', options)
+      .then(function(event) {
+        // success
+      })
+      .catch(function(event) {
+        // error
+      });
+
+
+    $cordovaInAppBrowser.close();
   
 })
 
